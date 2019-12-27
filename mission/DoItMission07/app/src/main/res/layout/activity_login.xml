@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+	<RelativeLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="10dp"
+	    android:layout_centerInParent="true"
+	    android:background="#aaffffff"
+	    >
+	    <LinearLayout
+		    android:orientation="vertical"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_toLeftOf="@+id/loginButton"
+		    android:layout_margin="4dp"
+		    >
+		    <LinearLayout
+			    android:orientation="horizontal"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_margin="4dp"
+			    >
+				<TextView
+					android:id="@+id/usernameLabel"
+					android:text="사용자명 : "
+					android:textColor="#ff222222"
+					android:textSize="16sp"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					/>
+
+				<EditText
+					android:id="@+id/usernameInput"
+					android:layout_width="170dp"
+					android:layout_height="wrap_content"
+					android:layout_alignBaseline="@id/usernameLabel" />
+			</LinearLayout>
+			<LinearLayout
+			    android:orientation="horizontal"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_margin="4dp"
+			    >
+				<TextView
+					android:id="@+id/passwordLabel"
+					android:text="비밀번호 : "
+					android:textColor="#ff222222"
+					android:textSize="16dp"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					/>
+
+				<EditText
+					android:id="@+id/passwordInput"
+					android:layout_width="170dp"
+					android:layout_height="wrap_content"
+					android:layout_alignBaseline="@id/passwordLabel"
+					android:layout_below="@+id/usernameInput"
+					android:inputType="textPassword" />
+			</LinearLayout>
+		</LinearLayout>
+		<Button
+			android:id="@+id/loginButton"
+			android:layout_width="100dp"
+			android:layout_height="100dp"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:layout_marginRight="4dp"
+			android:text="로그인"
+			/>
+	</RelativeLayout>
+	
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@drawable/background"
+		android:padding="10dp">
+		<Button
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/button"
+			android:text="내 위치 알리기"
+			android:textColor="#FFFFFFFF"
+			android:gravity="center_horizontal|center_vertical" />
+	</LinearLayout>
+</LinearLayout>

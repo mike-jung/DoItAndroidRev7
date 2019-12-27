@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_0"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="첫번째 화면" />
+        <item
+            android:id="@+id/nav_1"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="두번째 화면" />
+        <item
+            android:id="@+id/nav_2"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="세번째 화면" />
+    </group>
+
+    <item
+        android:title="설정">
+        <menu>
+            <item android:id="@+id/nav_user_setting"
+                android:icon="@android:drawable/ic_menu_preferences"
+                android:title="사용자 설정" />
+        </menu>
+    </item>
+
+</menu>
