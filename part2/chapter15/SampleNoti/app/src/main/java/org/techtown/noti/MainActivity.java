@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         NotificationCompat.Builder builder = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if (manager.getNotificationChannel(CHANNEL_ID) != null) {
+            if (manager.getNotificationChannel(CHANNEL_ID) == null) {
                 manager.createNotificationChannel(new NotificationChannel(
                         CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT
                 ));
