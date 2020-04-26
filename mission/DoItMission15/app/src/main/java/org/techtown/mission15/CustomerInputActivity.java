@@ -77,7 +77,7 @@ public class CustomerInputActivity extends AppCompatActivity {
         int curMonth = calendar.get(Calendar.MONTH);
         int curDay = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dialog = new DatePickerDialog(getApplicationContext(),  birthDateSetListener,  curYear, curMonth, curDay);
+        DatePickerDialog dialog = new DatePickerDialog(this,  birthDateSetListener,  curYear, curMonth, curDay);
         dialog.show();
     }
 
