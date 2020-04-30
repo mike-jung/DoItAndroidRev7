@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             @Override
             public void onClick(View v) {
                 running = false;
+                selected = 0;
+
+                view.clearAnimation();
             }
         });
 
@@ -104,19 +107,21 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             while(running) {
                 handler.post(new Runnable() {
                     public void run() {
-                        ImageInfo info = pictures.get(selected);
+                        if (selected < pictures.size()) {
+                            ImageInfo info = pictures.get(selected);
 
-                        view.setName(info.getDisplayName());
-                        view.setDate(info.getDateAdded());
-                        view.setImage(info.getPath());
+                            view.setName(info.getDisplayName());
+                            view.setDate(info.getDateAdded());
+                            view.setImage(info.getPath());
 
-                        view.startAnimation(translateIn);
+                            view.startAnimation(translateIn);
 
-                        selected += 1;
-                        if (selected > pictureCount) {
+                            selected += 1;
+                            textView.setText(selected + " / " + pictureCount + " 개");
+
+                        } else {
                             selected = 0;
                         }
-                        textView.setText(selected + " / " + pictureCount + " 개");
 
                     }
                 });
@@ -126,10 +131,14 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
                 } catch (Exception e) {
                 }
             }
+
+            running = false;
         }
     }
 
     private ArrayList<ImageInfo> queryAllPictures() {
+        pictureCount = 0;
+
         ArrayList<ImageInfo> result = new ArrayList<>();
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         String[] projection = { MediaStore.MediaColumns.DATA, MediaStore.MediaColumns.DISPLAY_NAME, MediaStore.MediaColumns.DATE_ADDED };
