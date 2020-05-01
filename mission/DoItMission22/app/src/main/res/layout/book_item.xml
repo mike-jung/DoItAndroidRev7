@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="#ffffffff">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#FFFFFFFF"
@@ -69,5 +69,7 @@
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
 </LinearLayout>
