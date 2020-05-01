@@ -1,6 +1,5 @@
 package org.techtown.location.widget;
 
-import android.Manifest;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -8,7 +7,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -18,11 +16,9 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -152,14 +148,18 @@ public class MyLocationProvider extends AppWidgetProvider {
 
 			final String bestProvider = manager.getBestProvider(criteria, true);
 
-			if (bestProvider != null && bestProvider.length() > 0) {
-				manager.requestLocationUpdates(bestProvider, 500, 10, listener);
-			} else {
-				final List<String> providers = manager.getProviders(true);
+			try {
+				if (bestProvider != null && bestProvider.length() > 0) {
+					manager.requestLocationUpdates(bestProvider, 500, 10, listener);
+				} else {
+					final List<String> providers = manager.getProviders(true);
 
-				for (final String provider : providers) {
-					manager.requestLocationUpdates(provider, 500, 10, listener);
+					for (final String provider : providers) {
+						manager.requestLocationUpdates(provider, 500, 10, listener);
+					}
 				}
+			} catch(SecurityException e) {
+				e.printStackTrace();
 			}
 		}
 
