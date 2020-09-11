@@ -1,6 +1,9 @@
 package org.techtown.mission28;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -15,12 +18,15 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+
+import androidx.core.app.NotificationCompat;
 
 import java.util.List;
 
@@ -84,7 +90,13 @@ public class MyLocationProvider extends AppWidgetProvider {
 
         Intent startIntent = new Intent(context, GPSLocationService.class);
 		startIntent.putExtra("command", "start");
-        context.startService(startIntent);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			context.startForegroundService(startIntent);
+		} else {
+			context.startService(startIntent);
+		}
+
 	}
 
 
@@ -174,6 +186,21 @@ public class MyLocationProvider extends AppWidgetProvider {
 
 			registerReceiver(sentReceiver, new IntentFilter("SMS_SENT_ACTION"));
 			registerReceiver(deliveredReceiver, new IntentFilter("SMS_DELIVERED_ACTION"));
+
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+				final String strId = "LocatonProvider";
+				final String strTitle = "LocatonProvider";
+				NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+				NotificationChannel channel = notificationManager.getNotificationChannel(strId);
+				if (channel == null) {
+					channel = new NotificationChannel(strId, strTitle, NotificationManager.IMPORTANCE_HIGH);
+					notificationManager.createNotificationChannel(channel);
+				}
+
+				Notification notification = new NotificationCompat.Builder(this, strId).build();
+				startForeground(1, notification);
+			}
+
 		}
 
 		public int onStartCommand(Intent intent, int flags, int startId) {
@@ -201,6 +228,10 @@ public class MyLocationProvider extends AppWidgetProvider {
 			unregisterReceiver(deliveredReceiver);
 
 			Log.d(TAG, "onDestroy() called.");
+
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+				stopForeground(true);
+			}
 
 			super.onDestroy();
 		}
